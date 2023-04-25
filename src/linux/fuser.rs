@@ -11,11 +11,9 @@ pub(crate) fn fusers_is_open(file_path: &str) -> bool {
                     if let Ok(fds) = fs::read_dir(format!("/proc/{}/fd", pid)) {
                         for fd in fds.flatten() {
                             if let Ok(ref opened_file) = fs::read_link(fd.path()) {
-                                if let Some(open_file_name) = opened_file.to_str() {
-                                    if open_file_name == file_path {
-                                        // Instant return if we find file is open be it any process
-                                        return true;
-                                    }
+                                if matches!(opened_file.to_str(), Some(open_file_name) if open_file_name == file_path)
+                                {
+                                    return true;
                                 }
                             }
                         }
