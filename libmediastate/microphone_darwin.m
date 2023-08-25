@@ -168,13 +168,11 @@ OSStatus IsMicrophoneOn(int *on) {
       failedDeviceCount++;
       // NSLog(@"C.IsMicrophoneOn(): %d | -       | failed to get device UID:
       // %d", i, err);
-      // continue;
       goto cleanup;
     }
 
     if (!isAudioCaptureDevice(uid)) {
       ignoredDeviceCount++;
-      // continue;
       goto cleanup;
     }
 
@@ -184,7 +182,6 @@ OSStatus IsMicrophoneOn(int *on) {
       failedDeviceCount++;
       // NSLog( @"C.IsMicrophoneOn(): %d | -       | failed to get device state:
       // %d", i, err);
-      // continue;
       goto cleanup;
     }
 
